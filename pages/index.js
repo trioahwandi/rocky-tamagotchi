@@ -195,7 +195,7 @@ export default function Home() {
               {/* Rocky Display */}
               <div className="rocky-float" style={{ marginTop: "16px", marginBottom: "24px", position: "relative" }}>
                 <div className="rocky-glow" style={{ width: "180px", height: "180px", borderRadius: "50%", background: MAIN_DARK, border: `3px solid ${MAIN_COLOR}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "80px" }}>
-                  <img src="/rocky.png" alt="Rocky"
+                  <img src="/rocky.PNG" alt="Rocky"
                     style={{ width: "130px", height: "130px", objectFit: "contain" }} />
                 </div>
                 <div style={{ position: "absolute", bottom: "-12px", left: "50%", transform: "translateX(-50%)", background: MAIN_COLOR, color: "white", fontSize: "11px", fontWeight: "bold", padding: "4px 14px", borderRadius: "999px", letterSpacing: "0.1em", whiteSpace: "nowrap" }}>
