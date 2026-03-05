@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { ethers } from "ethers";
-import { CONTRACT_ADDRESS, CONTRACT_ABI, NETWORK } from "./contract";
+import { CONTRACT_ADDRESS, CONTRACT_ABI, NETWORK } from "../config/contract";
 
 const MAIN_COLOR = "#825A6D";
 const MAIN_GLOW = "rgba(130, 90, 109, 0.6)";
