@@ -36,7 +36,7 @@ export default function Game() {
 
 useEffect(() => {
     const img = new Image();
-    img.src = "/rocky.png";
+    img.src = "/rocky.PNG";
     rockyImg.current = img;
 
     const rImg = new Image();
