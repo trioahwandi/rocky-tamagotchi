@@ -74,9 +74,9 @@ export default function Home() {
     try {
       const contract = await getContract();
       const tx = await contract[action]();
-      showMessage("Transaksi dikirim...", "info");
+      showMessage("Sending transaction...", "info");
       await tx.wait();
-      showMessage(`${action.charAt(0).toUpperCase() + action.slice(1)} berhasil! ✨`, "success");
+      showMessage(`${action.charAt(0).toUpperCase() + action.slice(1)} successful!`, "success");
       await loadRocky();
       await loadLeaderboard();
     } catch (err) {
@@ -90,9 +90,9 @@ export default function Home() {
     try {
       const contract = await getContract();
       const tx = await contract.createRocky();
-      showMessage("Membuat Rocky...", "info");
+      showMessage("Creating Rocky...", "info");
       await tx.wait();
-      showMessage("Rocky berhasil lahir! 🎉", "success");
+      showMessage("Rocky is born! 🎉", "success");
       await loadRocky();
     } catch (err) {
       showMessage("Error: " + (err.reason || err.message), "error");
@@ -270,7 +270,7 @@ export default function Home() {
               🏆 LEADERBOARD
             </h2>
             {leaderboard.length === 0 ? (
-              <p style={{ color: "#555", textAlign: "center", fontSize: "13px" }}>Belum ada pemain</p>
+              <p style={{ color: "#555", textAlign: "center", fontSize: "13px" }}>No players yet</p>
             ) : (
               leaderboard.map((entry, i) => (
                 <div key={i} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px 14px", borderRadius: "10px", marginBottom: "8px", background: i === 0 ? "rgba(255,200,50,0.08)" : i === 1 ? "rgba(200,200,200,0.05)" : i === 2 ? "rgba(200,100,50,0.08)" : "rgba(255,255,255,0.03)", border: `1px solid ${i === 0 ? "#ffc83288" : i === 1 ? "#aaaaaa44" : i === 2 ? "#cd7f3288" : "#ffffff11"}` }}>

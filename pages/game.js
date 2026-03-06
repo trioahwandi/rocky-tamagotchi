@@ -203,7 +203,7 @@ useEffect(() => {
 
   // Claim XP
   async function claimXP() {
-    if (score === 0) { setMessage("Main dulu baru claim!"); return; }
+    if (score === 0) { setMessage("Play first before claiming!"); return; }
     setClaiming(true);
     setMessage("");
     try {
@@ -216,7 +216,7 @@ useEffect(() => {
         const tx = await contract.resonate();
         await tx.wait();
       }
-      setMessage(`✨ ${claimAmount * 10} XP berhasil di-claim ke Rocky!`);
+      setMessage(`✨ ${claimAmount * 10} XP successfully claimed to Rocky!`);
     } catch (err) {
       setMessage("Error: " + (err.reason || err.message));
     }
@@ -248,7 +248,7 @@ useEffect(() => {
         {gameState === "idle" && (
           <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.8)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "16px" }}>
             <p style={{ color: "#aaa", fontSize: "13px", textAlign: "center", padding: "0 20px" }}>
-              Tangkap 🪨 batu untuk dapat XP<br />Hindari 💣 bom atau nyawa berkurang!
+              Catch 🪨 rocks to get XP<br />Avoid 💣 bombs or lose a life!
             </p>
             <button onClick={startGame} style={{ background: MAIN_COLOR, color: "white", fontWeight: "bold", padding: "12px 32px", borderRadius: "999px", border: "none", cursor: "pointer", fontSize: "16px" }}>
               ▶ Start Game
@@ -261,7 +261,7 @@ useEffect(() => {
           <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.85)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "12px" }}>
             <h2 style={{ color: "#ff5555", fontSize: "1.5rem", fontWeight: 900 }}>GAME OVER</h2>
             <p style={{ color: "#aaa", fontSize: "14px" }}>Score: <span style={{ color: MAIN_COLOR, fontWeight: "bold" }}>{score}</span></p>
-            <p style={{ color: "#aaa", fontSize: "13px" }}>XP yang bisa di-claim: <span style={{ color: "white", fontWeight: "bold" }}>{Math.floor(score / 10) * 10}</span></p>
+            <p style={{ color: "#aaa", fontSize: "13px" }}>Claimable XP: <span style={{ color: "white", fontWeight: "bold" }}>{Math.floor(score / 10) * 10}</span></p>
             <button onClick={claimXP} disabled={claiming} style={{ background: MAIN_COLOR, color: "white", fontWeight: "bold", padding: "10px 28px", borderRadius: "999px", border: "none", cursor: "pointer" }}>
               {claiming ? "Claiming..." : "⚡ Claim XP ke Rocky"}
             </button>
