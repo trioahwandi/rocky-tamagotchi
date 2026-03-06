@@ -210,19 +210,17 @@ useEffect(() => {
       const provider = new ethers.BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
       const contract = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, signer);
-      const claimAmount = Math.floor(score / 10);
-      // Pakai resonate sebagai proxy claim XP
-      for (let i = 0; i < Math.min(claimAmount, 5); i++) {
-        const tx = await contract.resonate();
-        await tx.wait();
-      }
-      setMessage(`✨ ${claimAmount * 10} XP successfully claimed to Rocky!`);
+      const claimAmount = Math.min(score, 200);
+      const tx = await contract.claimGameXP(claimAmount);
+      setMessage("Claiming XP...");
+      await tx.wait();
+      setMessage(`✨ ${claimAmount} XP successfully claimed to Rocky!`);
     } catch (err) {
       setMessage("Error: " + (err.reason || err.message));
     }
     setClaiming(false);
   }
-
+  
   return (
     <main style={{ background: "#0a0a0f", minHeight: "100vh", color: "white", fontFamily: "sans-serif", display: "flex", flexDirection: "column", alignItems: "center", paddingTop: "30px" }}>
 
