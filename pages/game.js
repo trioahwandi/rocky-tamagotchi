@@ -30,6 +30,7 @@ export default function Game() {
   const [score, setScore] = useState(0);
   const [lives, setLives] = useState(3);
   const [claiming, setClaiming] = useState(false);
+  const [claimed, setClaimed] = useState(false);
   const [message, setMessage] = useState("");
   const rockyImg = useRef(null);
   const rockImg = useRef(null);
@@ -78,6 +79,7 @@ useEffect(() => {
     g.frame = 0;
     setScore(0);
     setLives(3);
+    setClaimed(false);
     setGameState("playing");
     requestAnimationFrame(gameLoop);
   }
@@ -215,6 +217,7 @@ useEffect(() => {
       setMessage("Claiming XP...");
       await tx.wait();
       setMessage(`✨ ${claimAmount} XP successfully claimed to Rocky!`);
+      setClaimed(true);
     } catch (err) {
       setMessage("Error: " + (err.reason || err.message));
     }
@@ -260,9 +263,9 @@ useEffect(() => {
             <h2 style={{ color: "#ff5555", fontSize: "1.5rem", fontWeight: 900 }}>GAME OVER</h2>
             <p style={{ color: "#aaa", fontSize: "14px" }}>Score: <span style={{ color: MAIN_COLOR, fontWeight: "bold" }}>{score}</span></p>
             <p style={{ color: "#aaa", fontSize: "13px" }}>Claimable XP: <span style={{ color: "white", fontWeight: "bold" }}>{Math.floor(score / 10) * 10}</span></p>
-            <button onClick={claimXP} disabled={claiming} style={{ background: MAIN_COLOR, color: "white", fontWeight: "bold", padding: "10px 28px", borderRadius: "999px", border: "none", cursor: "pointer" }}>
-              {claiming ? "Claiming..." : "⚡ Claim XP ke Rocky"}
-            </button>
+            <button onClick={claimXP} disabled={claiming || claimed} style={{ background: claimed ? "#444" : MAIN_COLOR, color: "white", fontWeight: "bold", padding: "10px 28px", borderRadius: "999px", border: "none", cursor: claiming || claimed ? "not-allowed" : "pointer" }}>
+  {claiming ? "Claiming..." : claimed ? "✅ XP Claimed!" : "⚡ Claim XP to Rocky"}
+</button>
             <button onClick={startGame} style={{ background: "transparent", color: "#aaa", fontWeight: "bold", padding: "8px 24px", borderRadius: "999px", border: "1px solid #444", cursor: "pointer" }}>
               🔄 Main Lagi
             </button>
