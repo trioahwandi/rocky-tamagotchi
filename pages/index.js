@@ -173,6 +173,9 @@ export default function Home() {
         <p style={{ color: "#888", fontSize: "0.8rem", letterSpacing: "0.2em" }}>
           SEISMIC GUARDIAN — ON-CHAIN TAMAGOTCHI
         </p>
+        <a href="/game" style={{ color: MAIN_COLOR, fontSize: "12px", letterSpacing: "0.15em", textDecoration: "none", border: `1px solid ${MAIN_COLOR}`, padding: "6px 18px", borderRadius: "999px", marginTop: "8px", display: "inline-block" }}>
+  🎮 Play Rock Dodge
+</a>
       </div>
 
       {/* Connect Wallet */}
