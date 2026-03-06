@@ -37,9 +37,16 @@ export default function Home() {
       const contract = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, provider);
       const data = await contract.rockies(account);
       setRocky({
-        energy: Number(data[0]), stability: Number(data[1]),
-        resonance: Number(data[2]), mood: Number(data[3]),
-        level: Number(data[4]), xp: Number(data[5]), exists: data[7],
+        energy:          Number(data[0]),
+        stability:       Number(data[1]),
+        resonance:       Number(data[2]),
+        mood:            Number(data[3]),
+        level:           Number(data[4]),
+        xp:              Number(data[5]),
+        lastCheckIn:     Number(data[7]),
+        checkInStreak:   Number(data[8]),
+        exists:          data[9],
+        collapsed:       data[10],
       });
     } catch (err) { console.error(err); }
   }
@@ -195,7 +202,7 @@ export default function Home() {
               {/* Rocky Display */}
               <div className="rocky-float" style={{ marginTop: "16px", marginBottom: "24px", position: "relative" }}>
                 <div className="rocky-glow" style={{ width: "180px", height: "180px", borderRadius: "50%", background: MAIN_DARK, border: `3px solid ${MAIN_COLOR}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "80px" }}>
-                  <img src="/rocky.PNG" alt="Rocky"
+                  <img src="/rocky.png" alt="Rocky"
                     style={{ width: "130px", height: "130px", objectFit: "contain" }} />
                 </div>
                 <div style={{ position: "absolute", bottom: "-12px", left: "50%", transform: "translateX(-50%)", background: MAIN_COLOR, color: "white", fontSize: "11px", fontWeight: "bold", padding: "4px 14px", borderRadius: "999px", letterSpacing: "0.1em", whiteSpace: "nowrap" }}>
@@ -226,15 +233,25 @@ export default function Home() {
                 ))}
               </div>
 
-              {/* Action Buttons */}
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", width: "100%", maxWidth: "420px", marginBottom: "16px" }}>
-                {["feed", "train", "resonate", "stabilize"].map((action) => (
-                  <button key={action} onClick={() => doAction(action)} disabled={loading} className="btn-action">
-                    {loading ? "..." : action === "feed" ? "⚡ Feed" : action === "train" ? "💪 Train" : action === "resonate" ? "🌊 Resonate" : "🛡 Stabilize"}
-                  </button>
-                ))}
-              </div>
-            </>
+{/* Action Buttons */}
+<div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", width: "100%", maxWidth: "420px", marginBottom: "16px" }}>
+  {rocky.collapsed ? (
+    <button onClick={() => doAction("revive")} disabled={loading} className="btn-action" style={{ gridColumn: "span 2", background: "rgba(255,50,50,0.15)", borderColor: "#ff5555", color: "#ff8888" }}>
+      {loading ? "..." : "💀 Revive Rocky"}
+    </button>
+  ) : (
+    <>
+      {["feed", "train", "resonate", "stabilize"].map((action) => (
+        <button key={action} onClick={() => doAction(action)} disabled={loading} className="btn-action">
+          {loading ? "..." : action === "feed" ? "⚡ Feed" : action === "train" ? "💪 Train" : action === "resonate" ? "🌊 Resonate" : "🛡 Stabilize"}
+        </button>
+      ))}
+      <button onClick={() => doAction("checkIn")} disabled={loading} className="btn-action" style={{ gridColumn: "span 2", background: "rgba(130,90,109,0.3)", borderColor: "#825A6D" }}>
+        {loading ? "..." : `📅 Daily Check-in ${rocky.checkInStreak > 0 ? `🔥 ${rocky.checkInStreak} day streak` : ""}`}
+      </button>
+    </>
+  )}
+</div>            </>
           )}
 
           {/* Message */}

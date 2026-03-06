@@ -1,4 +1,4 @@
-export const CONTRACT_ADDRESS = "0x5c565CBA75915406B1dAef155A9Bce530E1d57Bf";
+export const CONTRACT_ADDRESS = "0x948466f9c37a9A5c4e08f89c02DD9B3321dfB53D";
 
 export const CONTRACT_ABI = [
   "function createRocky() public",
@@ -6,7 +6,9 @@ export const CONTRACT_ABI = [
   "function train() public",
   "function resonate() public",
   "function stabilize() public",
-  "function rockies(address) public view returns (uint, uint, uint, uint, uint, uint, uint, bool)",
+  "function revive() public",
+  "function checkIn() public",
+  "function rockies(address) public view returns (uint, uint, uint, uint, uint, uint, uint, uint, uint, bool, bool)",
   "function getLeaderboard() public view returns (tuple(address player, uint256 level, uint256 xp, uint256 resonance)[])",
   "function getTotalPlayers() public view returns (uint)"
 ];
